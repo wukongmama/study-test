@@ -1,3 +1,4 @@
+'''
 import sys
 
 size = 0
@@ -24,3 +25,27 @@ for line in sys.stdin:
     print(v1)
     size = size + v1
     print(size)
+'''
+
+import sys
+import re
+
+sum=0
+r = r'(\S+\s+){4}(\S+)'
+
+for line in sys.stdin:
+    searchobj = re.search (r,line)
+    if not searchobj:
+        continue
+    size = searchobj.group(2)
+    num = float (size [:-1])
+    if size [-1] == "B":
+        sum = sum + num
+    elif size [-1] == "K":
+        sum = sum +num * 1024
+    elif size [-1] == "G":
+        sum = sum + num * 1024 * 1024
+    else:
+        sum = sum + num* 1024* 1024 * 1024
+
+print(sum)
