@@ -27,6 +27,7 @@ for line in sys.stdin:
     print(size)
 '''
 
+'''
 import sys
 import re
 
@@ -47,5 +48,25 @@ for line in sys.stdin:
         sum = sum + num * 1024 * 1024
     else:
         sum = sum + num* 1024* 1024 * 1024
+
+print(sum)
+'''
+
+import sys
+import re
+
+sum=0
+r = r'(\S+\s+){4}(\S+)'
+dict = {'B':1, 'K':1024,'G':1048576,'T':1073742e9}
+
+for line in sys.stdin:
+    searchobj = re.search (r,line)
+    if not searchobj:
+        continue
+    size = searchobj.group(2)
+    num = float (size [:-1])
+    unit = dict.get(size [-1])  # a unit, or None
+    if unit:
+        sum = sum + num * unit
 
 print(sum)
